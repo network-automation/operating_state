@@ -1,16 +1,4 @@
-- name: Build a list of state gatherers
-  set_fact:
-    gather: "{{ available_gather|
-                param_list_compare(gather_states|default([])) }}"
-
-- name: Run the platform discovery to determine engine
-  include: "{{ item }}"
-  with_first_found:
-  - "includes/{{ ansible_network_os }}/platform_discovery.yaml"
-  - "includes/unsupported_platform.yaml"
-
-- name: Load the state gatherer
-  include: "includes/load_gather.yaml"
-  loop: "{{ gather }}"
-  loop_control:
-    loop_var: gather_one
+# Only run the role when gather_states is defined, allow for registration of
+# plugins using the 'role' directive
+- include_tasks: execute.yml
+  when: gather_states is defined

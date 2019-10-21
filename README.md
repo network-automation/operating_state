@@ -30,7 +30,7 @@
 
 ## Quick start
 
-```
+```yaml
 - hosts: all
   gather_facts: false
   roles:
@@ -52,7 +52,7 @@
 
 #### Only gather a specfic resource
 
-```
+```yaml
 - hosts: all
   gather_facts: false
   roles:
@@ -66,7 +66,7 @@
 
 #### Gather all, excluding a specfic resource
 
-```
+```yaml
 - hosts: all
   gather_facts: false
   roles:
@@ -79,16 +79,19 @@
       var: ansible_facts
 ```
 
-#### Gather statistics before and after a network change and compare
+#### Gather all resource statistics before and after a network change and compare
 
-```
+```yaml
 - hosts: all
   gather_facts: false
+  roles:
+  - role: operating_state # this is necessary to register the plugins
   tasks:
   - include_role:
       name: operating_state
     vars:
       fact_key: before
+      only_stats: True
       gather_states:
       - all
   - debug:
@@ -97,6 +100,7 @@
       name: operating_state
     vars:
       fact_key: after
+      only_stats: True
       gather_states:
       - all
 
