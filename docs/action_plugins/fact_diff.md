@@ -78,11 +78,11 @@ The `to_dotted` filter plugin becomes useful to identify changes that may be dee
   - name: Show the difference as dotted
     fact_diff:
       before: {}
-      after: "{{ hostvars[inventory_hostname]|nmake.jetpack.to_dotted }}"
+      after: "{{ hostvars[inventory_hostname]|to_dotted }}"
   - name: Show the difference as dotted yaml
     fact_diff:
       before: {}
-      after: "{{ hostvars[inventory_hostname]|nmake.jetpack.to_dotted|to_nice_yaml }}"
+      after: "{{ hostvars[inventory_hostname]|to_dotted|to_nice_yaml }}"
 ```
 
 See the examples directory for additional examples.
