@@ -1,0 +1,18 @@
+---
+fact_key: "gathered_states"
+only_stats: False
+
+available_gather:
+- "arp"
+- "cdp"
+- "fex"
+- "hardware"
+- "interfaces"
+- "lldp"
+- "mac"
+- "spanning_tree"
+- "system"
+- "version"
+- "vlan"
+- "vlan.private_vlan"
+- "vpc"

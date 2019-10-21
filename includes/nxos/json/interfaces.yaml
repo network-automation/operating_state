@@ -1,0 +1,86 @@
+---
+- name: "nxos.interfaces: show interface"
+  cli_parse_transform:
+    engine: "native_json"
+    commands:
+      - command: "show interface"
+        set_fact: True
+        transform:
+        - name: "nxos_flatten_table_row"
+          plural: true
+        - name: stats
+          only_stats: "{{ only_stats }}"
+          keys:
+          - admin_state
+          - state
+          - state_rsn_desc
+          - eth_hw_desc
+          - eth_duplex
+          - eth_bw
+        - name: set_root_key
+          key: interfaces
+        - name: set_root_key
+          key: "{{ fact_key }}"
+
+- name: "nxos.interfaces: show interface counters errors"
+  cli_parse_transform:
+    engine: "native_json"
+    commands:
+    - command: "show interface counters errors"
+      set_fact: True
+      transform:
+      - name: "str_to_native"
+      - name: "nxos_flatten_table_row"
+        plural: True
+      - name: set_root_key
+        key: errors
+      - name: set_root_key
+        key: counters
+      - name: set_root_key
+        key: interfaces
+      - name: set_root_key
+        key: "{{ fact_key }}"
+  when: not only_stats
+
+- name: "nxos.interfaces: show interface switchport"
+  cli_parse_transform:
+    engine: "native_json"
+    commands:
+    - command: "show interface switchport"
+      set_fact: True
+      transform:
+      - name: "nxos_flatten_table_row"
+        plural: True
+      - name: stats
+        only_stats: "{{ only_stats }}"
+        keys:
+        - access_vlan
+        - native_vlan
+        - oper_mode
+        - switchport
+      - name: set_root_key
+        key: switchport
+      - name: set_root_key
+        key: interfaces
+      - name: set_root_key
+        key: "{{ fact_key }}"
+
+- name: "nxos.interfaces: show interface transceiver"
+  cli_parse_transform:
+    engine: "native_json"
+    commands:
+    - command: "show interface transceiver"
+      set_fact: True
+      transform:
+      - name: "nxos_flatten_table_row"
+        plural: True
+      - name: stats
+        only_stats: "{{ only_stats }}"
+        keys:
+        - sfp
+      - name: set_root_key
+        key: transceiver
+      - name: set_root_key
+        key: interfaces
+      - name: set_root_key
+        key: "{{ fact_key }}"
