@@ -61,7 +61,7 @@ By default, each fact is serialized to json prior to the comparison. Changing th
 
 The `to_dotted` filter plugin becomes useful to identify changes that may be deeply nested within the fact.
 
-```
+```yaml
 - hosts: nxos101
   gather_facts: false
   collections:
