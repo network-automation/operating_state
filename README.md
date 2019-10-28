@@ -110,6 +110,6 @@
       after: "{{ after|default({})|to_dotted }}"
 ```
 
-## Addional documentation
+## Additional documentation
 
 Additional documentation for the included filter and action plugins can be found in the docs folder.
