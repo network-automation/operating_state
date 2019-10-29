@@ -34,7 +34,7 @@
 - hosts: all
   gather_facts: false
   roles:
-  - role: gather_states
+  - role: operating_state
     gather_states:
     - all
   tasks:
