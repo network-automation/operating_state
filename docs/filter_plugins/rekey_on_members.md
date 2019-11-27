@@ -81,7 +81,7 @@ ansible_facts:
         type: 10g
 
 - debug:
-    msg: "{{ data|nmake.jetpack.rekey_on_members(['interface']) }}"
+    msg: "{{ data|rekey_on_members(['interface']) }}"
 
 # result
 msg:
